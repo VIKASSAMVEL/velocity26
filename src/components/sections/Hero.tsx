@@ -33,7 +33,7 @@ export const Hero = () => {
                 </div>
 
                 <h1 className="text-[18vw] md:text-[12vw] leading-[0.85] font-display text-white uppercase select-none mb-2 glitch-text" data-text="VELOCITY">
-                    VELO<span className="text-primary relative inline-block">CITY</span>
+                    <span className="text-primary relative inline-block">VEL</span>OCITY
                 </h1>
 
                 <div className="text-[12vw] md:text-[8vw] leading-[0.8] mb-8 flex items-center justify-center gap-4 font-display text-accent glitch-text" data-text="'26">

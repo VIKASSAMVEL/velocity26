@@ -25,7 +25,7 @@ export const Navbar = () => {
             audioRef.current.pause();
         } else {
             // Provide a catch for browsers blocking autoplay
-            audioRef.current.play().catch(e => console.log("Audio play blocked by browser."+e));
+            audioRef.current.play().catch(e => console.log("Audio play blocked by browser." + e));
         }
         setIsPlaying(!isPlaying);
     };
@@ -38,7 +38,7 @@ export const Navbar = () => {
         >
             <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
                 <div className="font-display text-2xl md:text-3xl tracking-widest uppercase flex items-center gap-2">
-                    <span className="glitch-text" data-text="VELOCITY">VELO<span className="text-primary">CITY</span></span>
+                    <span className="glitch-text" data-text="VELOCITY"><span className="text-primary">VEL</span>OCITY</span>
 
                     {prowlerMode && (
                         <motion.span
