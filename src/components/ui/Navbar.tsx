@@ -25,7 +25,7 @@ export const Navbar = () => {
             audioRef.current.pause();
         } else {
             // Provide a catch for browsers blocking autoplay
-            audioRef.current.play().catch(e => console.log("Audio play blocked by browser."));
+            audioRef.current.play().catch(e => console.log("Audio play blocked by browser."+e));
         }
         setIsPlaying(!isPlaying);
     };
