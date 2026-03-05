@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0a0a0a;
+  /* Obsidian */
+  --color-foreground: #ededed;
+
+  /* Spider-Verse Palette */
+  --color-primary: #FF0033;
+  /* Neon Red */
+  --color-secondary: #00E5FF;
+  /* Web Cyan */
+  --color-accent: #7C3AED;
+  /* Prowler Purple */
+
+  /* Prowler Mode overrides (applied via JS class toggle) */
+  --prowler-primary: #7C3AED;
+  --prowler-secondary: #00FF00;
+  --prowler-accent: #FF0033;
+  --prowler-background: #050014;
+
+  --font-sans: var(--font-source), system-ui, sans-serif;
+  --font-display: var(--font-bebas), "Impact", sans-serif;
+
+  --animate-glitch: glitch 3s infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-swing: swing 6s ease-in-out infinite;
+
+  @keyframes glitch {
+    0% {
+      transform: translate(0)
+    }
+
+    20% {
+      transform: translate(-2px, 2px)
+    }
+
+    40% {
+      transform: translate(-2px, -2px)
+    }
+
+    60% {
+      transform: translate(2px, 2px)
+    }
+
+    80% {
+      transform: translate(2px, -2px)
+    }
+
+    100% {
+      transform: translate(0)
+    }
+  }
+
+  @keyframes scanline {
+    0% {
+      transform: translateY(-100%)
+    }
+
+    100% {
+      transform: translateY(100vh)
+    }
+  }
+
+  @keyframes swing {
+    0% {
+      transform: rotate(3deg);
+    }
+
+    50% {
+      transform: rotate(-3deg);
+    }
+
+    100% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
+/* Base Styles */
+@layer base {
+  .prowler-mode {
+    --color-primary: var(--prowler-primary);
+    --color-secondary: var(--prowler-secondary);
+    --color-accent: var(--prowler-accent);
+    --color-background: var(--prowler-background);
+  }
+
+  * {
+    @apply border-white/10 outline-none transition-colors duration-200;
+    cursor: none !important;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans selection:bg-primary/30 selection:text-primary overflow-x-hidden;
+    cursor: none;
+    /* We use a custom cursor */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-wide uppercase;
+  }
+}
+
+/* Spider-Verse Thematic Utilities */
+
+/* Halftone Pattern Background */
+.halftone-bg {
+  background-image: radial-gradient(var(--color-primary) 1px, transparent 1px),
+    radial-gradient(var(--color-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.halftone-bg-cyan {
+  background-image: radial-gradient(var(--color-secondary) 1px, transparent 1px),
+    radial-gradient(var(--color-secondary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+/* Comic Panel Slanted Box */
+.comic-panel {
+  clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+  @apply border-2 border-primary bg-black/80 backdrop-blur-md relative;
+  transition: all 0.3s ease;
+}
+
+.comic-panel:hover {
+  clip-path: polygon(0% 0, 100% 3%, 100% 100%, 3% 97%);
+  @apply border-secondary scale-105 z-10;
+  box-shadow: 10px 10px 0px 0px var(--color-primary);
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--color-primary);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--color-secondary);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(20px, 9999px, 80px, 0);
+  }
+
+  20% {
+    clip: rect(60px, 9999px, 20px, 0);
+  }
+
+  40% {
+    clip: rect(100px, 9999px, 50px, 0);
+  }
+
+  60% {
+    clip: rect(30px, 9999px, 90px, 0);
+  }
+
+  80% {
+    clip: rect(50px, 9999px, 10px, 0);
+  }
+
+  100% {
+    clip: rect(10px, 9999px, 70px, 0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    clip: rect(60px, 9999px, 30px, 0);
+  }
+
+  20% {
+    clip: rect(10px, 9999px, 60px, 0);
+  }
+
+  40% {
+    clip: rect(90px, 9999px, 10px, 0);
+  }
+
+  60% {
+    clip: rect(40px, 9999px, 80px, 0);
+  }
+
+  80% {
+    clip: rect(80px, 9999px, 40px, 0);
+  }
+
+  100% {
+    clip: rect(20px, 9999px, 90px, 0);
+  }
+}
+
+/* Custom Web Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
